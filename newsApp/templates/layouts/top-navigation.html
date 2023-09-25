@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white; 
+            color: black; 
+            font-weight: bold; /* Make text bold */
+            z-index: 999; /* Ensures the header is on top of other content */
+            padding: 20px;
+        }
+
+        .header-area .newsbox-main-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Add your additional CSS styles here for the header, menu, etc. */
+        /* ... */
+
+        .content {
+            margin-top: 80px; /* Adjust margin to account for the fixed header height */
+            padding: 20px;
+            overflow-y: auto; /* Enable scrollbar for the content */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header-area">
+        <!-- Your existing header content here -->
+        <div class="newsbox-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container-fluid">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="newsboxNav">
+                        <!-- Nav brand -->
+                        <a href="{% url 'home-page' %}" class="nav-brand"><img src="{% static 'img/core-img/apnaindia.png' %}" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="{%url 'home-page'%}">Home</a>
+                                    {% comment %} {% for category in categories %}
+                                    <li><a href="{% url 'category-post' category.id %}">{{category}}</a></li>
+                                    {% endfor %} {% endcomment %}
+                                    {% if not user.id %}
+                                    <li><a href="{% url 'login-page' %}">Login</a></li>
+                                    {% else %}
+                                    <li>
+                                        <a href="#"> {{user.username}}</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{% url 'profile-page' %}">Profile</a></li>
+                                            <li><a href="{% url 'new-post' %}">New Post</a></li>
+                                            <li><a href="{% url 'all-posts' %}">All Posts</a></li>
+                                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <!-- The rest of your content goes here -->
+    </div>
+</body>
+</html>
